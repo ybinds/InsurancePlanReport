@@ -1,5 +1,5 @@
 # Assumptions made so far as on 12/20/2022
-1. Start and Dates are ignored for now
+1. Start and End Dates are ignored for now
 2. Downloads of data in different formats is ignored as I still have to research into the process/logic involved. I do not have experience to do this in Java
 3. I took Status into another table assuming that at the data entry page for Customers table is also not hardcoded and the drop down is populated from this Status table.
 4. If only plan id is selected, all the customer applications belonging to the selected plan id are listed
