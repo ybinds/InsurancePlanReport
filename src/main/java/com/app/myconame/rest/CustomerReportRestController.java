@@ -22,7 +22,8 @@ public class CustomerReportRestController {
 	@Autowired
 	private ICustomerReportService service;
 
-	/* Assumptions - I am not considering the dates yet in this scenario.*/
+	/* Assumptions - I am not considering the dates yet in this scenario.
+	 * Ignored the writing to excel and pdf as well*/
 	@PostMapping("/search")
 	public ResponseEntity<List<Customer>> getCustomers(
 			@RequestBody SearchCustomer scustomer){
