@@ -6,6 +6,7 @@ import com.app.myconame.entity.Customer;
 
 public interface ICustomerReportService {
 	
+	List<Customer> getAllCustomers();
 	List<Customer> getCustomersByPlan(Integer planId);
 	List<Customer> getCustomersByStatus(Integer statusId);
 	List<Customer> getCustomersByStatusAndPlan(Integer statusId, Integer planId);

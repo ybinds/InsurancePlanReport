@@ -26,28 +26,30 @@ public class CustomerReportServiceImpl implements ICustomerReportService {
 	@Autowired
 	private StatusRepository statusRepo;
 
-	public List<Customer> getCustomersByStatusAndPlan(Integer statusId, Integer planId) {
-		// retrieve records that match both status and plan ids. 
-		// SELECT * FROM customers WHERE plan_id=:planId AND status_id=statuId
-		// I do not know how to join these in spring framework to get the data
-		return null;
+	public List<Customer> getAllCustomers() {
+		return customerRepo.findAll();
 	}
 	
 	public List<Customer> getCustomersByPlan(Integer planId) {
-//		if(planId == null || !planRepo.existsById(planId))
-//			throw new NoSuchPlanExistsException("NO SUCH PLAN EXISTS"); 
-//		else 	
-//			return customerRepo.getByPlan(planId);
-		return null;
+		if(planId == null || !planRepo.existsById(planId))
+			throw new NoSuchPlanExistsException("NO SUCH PLAN EXISTS"); 
+		else 	
+			return customerRepo.getCustomersByPlan(planId);
 	}
 
 	public List<Customer> getCustomersByStatus(Integer statusId) {
-//		if(statusId == null || !statusRepo.existsById(statusId))
-//			throw new NoSuchStatusExistsException("NO SUCH STATUS EXISTS"); 
-//		else 	
-//			return customerRepo.getByStatus(statusId);
-		return null;
+		if(statusId == null || !statusRepo.existsById(statusId))
+			throw new NoSuchStatusExistsException("NO SUCH STATUS EXISTS"); 
+		else 	
+			return customerRepo.getCustomersByStatus(statusId);
 	}
 
-	
+	public List<Customer> getCustomersByStatusAndPlan(Integer statusId, Integer planId) {
+		if(statusId == null || !statusRepo.existsById(statusId))
+			throw new NoSuchStatusExistsException("NO SUCH STATUS EXISTS"); 
+		else if(planId == null || !planRepo.existsById(planId))
+			throw new NoSuchPlanExistsException("NO SUCH PLAN EXISTS");
+		else
+			return customerRepo.getCustomersByStatusAndPlan(statusId, planId);
+	}
 }
