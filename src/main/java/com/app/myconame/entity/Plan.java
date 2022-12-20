@@ -22,5 +22,5 @@ public class Plan {
 	private Integer planId;
 	
 	private String planName;
-	private Boolean planActive;
+	//private Boolean planActive;
 }

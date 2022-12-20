@@ -17,5 +17,5 @@ public class Status {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer statusId;
 	private String statusName;
-	private Boolean statusActive;
+	//private Boolean statusActive;
 }

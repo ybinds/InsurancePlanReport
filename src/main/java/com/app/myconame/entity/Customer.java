@@ -53,5 +53,5 @@ public class Customer {
 	@JsonFormat(pattern = "mm/dd/yyyy")
 	private LocalDate customerPlanEndDate;
 	
-	private Boolean customerActive;
+	//private Boolean customerActive;
 }

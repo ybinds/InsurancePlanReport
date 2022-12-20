@@ -8,4 +8,5 @@ public interface ICustomerReportService {
 	
 	List<Customer> getCustomersByPlan(Integer planId);
 	List<Customer> getCustomersByStatus(Integer statusId);
+	List<Customer> getCustomersByStatusAndPlan(Integer statusId, Integer planId);
 }
