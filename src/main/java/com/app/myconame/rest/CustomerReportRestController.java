@@ -1,10 +1,14 @@
 package com.app.myconame.rest;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.filters.CorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +22,7 @@ import com.app.myconame.entity.Customer;
 import com.app.myconame.exception.NoSuchPlanExistsException;
 import com.app.myconame.exception.NoSuchStatusExistsException;
 import com.app.myconame.service.ICustomerReportService;
+import com.lowagie.text.DocumentException;
 
 @RestController
 @CrossOrigin
@@ -54,18 +59,27 @@ public class CustomerReportRestController {
 			) throws IOException {
 		response.setContentType("application/octet-stream");
 		String headerKey = "Content-Disposition";
-		String headerValue = "attachment; filename=customers-insurance.xls";
+		DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD:HH:MM:SS");
+	    String currentDateTime = dateFormat.format(new Date());
+		String headerValue = "attachment; filename=customers-plans" + currentDateTime + "xls";
 		response.setHeader(headerKey, headerValue);
-		service.downloadAsExcel(response, scustomer);
+		service.downloadAsExcel(response,scustomer);
+		response.flushBuffer();
 	}
 	
 	// Method to write into excel not sure what type of request call would this be either	
+	@PostMapping("/pdf")
 	public void downloadAsPdf(
-			@RequestBody SearchCustomer scustomer
-			) {
+			@RequestBody SearchCustomer scustomer,
+			HttpServletResponse response
+			) throws DocumentException, IOException{
 		// logic to download as pdf sheet
-		//List<Customer> customers = getCustomersBySearch(scustomer);
-		// and then print these into pdf sheet, I am not sure of the logic, 
-		// so don't even know about service methods
+		response.setContentType("application/pdf");
+	    DateFormat dateFormat = new SimpleDateFormat("YYYY-MM-DD:HH:MM:SS");
+	    String currentDateTime = dateFormat.format(new Date());
+	    String headerkey = "Content-Disposition";
+	    String headervalue = "attachment; filename=customers-plans" + currentDateTime + ".pdf";
+	    response.setHeader(headerkey, headervalue);
+	    service.downloadAsPdf(response, scustomer);
 	}
 }
